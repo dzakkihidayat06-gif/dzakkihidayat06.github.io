@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Digital | Ahmad Dzakki Hidayat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Pengaturan Variabel Warna & Dasar --- */
+        :root {
+            /* Palette Warna Vibrant */
+            --color-bg-base: #10101a; /* Ungu gelap pekat untuk dasar */
+            --color-primary: #ff007f; /* Pink Neon */
+            --color-secondary: #00f2fe; /* Cyan Terang */
+            --color-tertiary: #4facfe; /* Biru Langit */
+            --color-quaternary: #7300ff; /* Ungu Violet */
+            
+            /* Warna Teks & Elemen */
+            --text-main: #ffffff;
+            --text-muted: #b0b0cc;
+            --glass-bg: rgba(255, 255, 255, 0.03); /* Transparansi sangat tipis */
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --card-hover-bg: rgba(255, 255, 255, 0.07);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--color-bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- DESAIN LATAR BELAKANG BERWARNA (Mesh Gradient) --- */
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            width: 80vw;
+            height: 80vw;
+            border-radius: 50%;
+            opacity: 0.15; 
+            filter: blur(100px); 
+            z-index: -1; 
+            pointer-events: none;
+        }
+
+        body::before {
+            background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
+            top: -20%;
+            left: -20%;
+            animation: meshMove1 20s ease-in-out infinite alternate;
+        }
+
+        body::after {
+            background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
+            bottom: -20%;
+            right: -20%;
+            animation: meshMove2 25s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes meshMove1 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(10%, 15%) scale(1.1); }
+            100% { transform: translate(-5%, 5%) scale(1); }
+        }
+
+        @keyframes meshMove2 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-15%, -10%) scale(1.1); }
+            100% { transform: translate(10%, -15%) scale(1); }
+        }
+
+        /* --- Navigasi Modern (Glassmorphism) --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 0;
+            background: rgba(16, 16, 26, 0.7); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        /* --- Main Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 140px 20px 80px;
+        }
+
+        /* --- Profile Header (Colorful & Bold) --- */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .profile-img-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+
+        .profile-img-container::before {
+            content: '';
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            background: linear-gradient(45deg, var(--color-primary), var(--color-tertiary), var(--color-secondary));
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(15px);
+            opacity: 0.7;
+        }
+
+        .profile-img {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05) rotate(3deg);
+        }
+
+        .profile-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ffffff, var(--color-secondary), #ffffff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shineText 5s linear infinite;
+            margin-bottom: 8px;
+        }
+
+        @keyframes shineText {
+            to { background-position: 200% center; }
+        }
+
+        .profile-header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* --- Sections Styling --- */
+        section {
+            margin-bottom: 110px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.4s; }
+        section:nth-child(4) { animation-delay: 0.6s; }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+        }
+
+        h2::before {
+            content: "";
+            width: 40px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-tertiary));
+            border-radius: 2px;
+        }
+
+        /* --- Grid & Cards (Modern Glassmorphism) --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 35px;
+            border-radius: 24px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--color-secondary);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 242, 254, 0.15);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        /* --- Tombol Sertifikat Berwarna --- */
+        .btn-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--color-tertiary) 0%, var(--color-quaternary) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(115, 0, 255, 0.3);
+        }
+
+        .btn-link:hover {
+            box-shadow: 0 6px 20px rgba(115, 0, 255, 0.5);
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 50px;
+            border-top: 1px solid var(--glass-border);
+            color: #505070;
+            font-size: 0.85rem;
+            font-weight: 300;
+            background: rgba(10, 10, 20, 0.5);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsif (HP & Tablet) --- */
+        @media (max-width: 768px) {
+            nav { padding: 10px 0; overflow-x: auto; white-space: nowrap; }
+            nav a { margin: 0 10px; font-size: 0.7rem; letter-spacing: 1px; }
+            .container { padding-top: 110px; }
+            .profile-header h1 { font-size: 2.2rem; }
+            .profile-img { width: 140px; height: 140px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#beranda">Beranda</a>
+        <a href="#info">Tentang</a>
+        <a href="#projek">Projek</a>
+        <a href="#sertifikat">Sertifikat</a>
+    </nav>
+
+    <div class="container">
+        
+        <header id="beranda" class="profile-header">
+            <div class="profile-img-container">
+                <img src="https://lh3.googleusercontent.com/d/1XZmZVoMUb6BoHaLkKm2aAG8qQVk-xECh" alt="Foto Ahmad Dzakki Hidayat" class="profile-img">
+            </div>
+            <h1>Ahmad Dzakki Hidayat</h1>
+            <p>IT Student • Universitas Latansa Mashiro • Networking & Design</p>
+        </header>
+
+        <section id="info">
+            <h2>Tentang Saya</h2>
+            <div class="card" style="width: 100%;">
+                <p>Saya adalah mahasiswa Teknologi Informasi yang antusias dengan dunia administrasi sistem dan arsitektur jaringan komputer. Memiliki fokus pada pengelolaan sistem operasi Linux (khususnya Slackware), manajemen basis data SQL, serta perancangan model bisnis kreatif (BMC). Saya senang memadukan keahlian teknis dengan estetika desain visual untuk menciptakan solusi digital yang efisien, modern, dan menarik.</p>
+            </div>
+        </section>
+
+        <section id="projek">
+            <h2>Projek Unggulan</h2>
+            <div class="grid">
+                <div class="card">
+                    <div>
+                        <h3>Visualisasi Kampus Unilam</h3>
+                        <p>Konsep desain interior modern dan fungsional untuk Laboratorium Komputer dan Perpustakaan, serta rancangan armada transportasi khusus mahasiswa.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Manajemen Linux & VirtualBox</h3>
+                        <p>Implementasi, konfigurasi, dan manajemen sistem operasi Slackware dalam lingkungan virtual untuk keperluan simulasi server jaringan.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Business Model Canvas (BMC)</h3>
+                        <p>Perancangan strategi model bisnis komprehensif untuk jasa perbaikan elektronik rumah tangga yang terintegrasi dengan layanan digital modern.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sertifikat">
+            <h2>Sertifikat & Pencapaian</h2>
+            <div class="grid">
+                <div class="card">
+                    <div>
+                        <h3>Huawei Ict Academy</h3>
+                        <p>https://drive.google.com/file/d/1lSv2EJk5JZ0nUPU67fO4GQIOiqT_4upk/view?usp=drivesdk.</p>
+                    </div>
+                    <a href="#" target="_blank" class="btn-link">Lihat Kredensial</a>
+                
+        
+                    
+                        
+            
+                  
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        &copy; 2026 Ahmad Dzakki Hidayat. <br>
+        Didesain dengan pendekatan modern dan dipublish di GitHub Pages.
+    </footer>
+
+</body>
+</html>
